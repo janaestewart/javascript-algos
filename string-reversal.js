@@ -84,3 +84,6 @@ function reverseString(text) {
    
 }
 
+//Testing Performance with JSPerf
+
+// From the test carried out, the fastest solution we have considered is using the .reduce() method. Next, is the for-loop method which is only 6% slower and is a pretty close one. The slowest of them all is the method of chaining .split(), .reduce() and .join(59% slower).
