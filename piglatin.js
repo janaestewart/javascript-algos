@@ -74,4 +74,30 @@
 
                 //At the last line, we use the .slice() method to manipulate the string to generate the Pig Latin equivalent.
 
+                        //str.slice(vowelIndex) extracts a portion of the string starting from the first vowel(i.e the vowelIndex up till the end.
+                        
+                        //str.slice(0, vowelIndex) extracts the portion of the string starting at index 0(i.e the beginning) up until the first vowel at position vowelIndex. The extracted portion here is the consonant or consonant cluster as the case may be. Note that the .slice() method returns the portion from the starting index to but not including the end index.
+
+                        //We combine these extracted portions and affix "``ay``" to the end to form the final result which is returned from the function as such.
+
+        //A Declarative Approach
+
+                //In this approach, we implement a very concise solution to this challenge by combining the .replace() method and regular expressions to transform the received string into its Pig Latin equivalent.
+
+                function pigLatin(str) {
+                        return str
+                        .replace(/^([aeiouy])(._)/, '$1$2way')
+                        .replace(/^(_[_^aeiouy]+)(._)/, '$2$1ay')
+                }
+
+                //Our solution comprises mainly of two parts as analyzed below:
+
+                        //.replace(/^([aeiouy])(.*``*)/, '$1$2way')* -_ This statement specifies a replacement to be carried out if the word begins with a vowel. This is specified in the first bracket within the_ *.replace()* method call i.e *([aeiou])*. The second bracket *(.*)* refers to every other character after the vowel. Thus, the expression specifies a pattern for words beginning with a vowel and followed by anything else. When this case is matched, a new string in the format of '``$1$2way``' is generated and used to replace the original srtring. $1 here refers to the first bracket and $2, the second bracket. This means that we simply take the word as it was and affix "``way``" to the end.
+
+                        //.replace(/^([^aeiouy]+)(.*)/, '$2$1ay') - This statement specifies that if the word does not start with a vowel i.e ^([aeiouy]+), and is followed by anything else (``*.*)*, it should be replaced with a string formatted in the order '$2$1ay``'. The plus sign in ^([aeiouy]+) caters for a situation where there is a consonant cluster. Thus it represents every non-vowel character at the start of the word. '$2$1ay' generates the new string in the order of remaining characters + consonant cluster + '``ay``'. This gives the Pig Latin equivalent.
+
+                //Note that we chain both .replace() methods in succession such that both cases are tested and only the one that matches will be evaluated further.
+
 //Testing
+
+                //The result of our comparison reveals that the fastest solution is the Imperative approach and the declarative approach is approximately 88% slower.
